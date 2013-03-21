@@ -3,7 +3,6 @@
 
 require 'digest'
 require 'optparse'
-require 'bsearch'
 
 opt = OptionParser.new
 
