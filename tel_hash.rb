@@ -28,6 +28,9 @@ fhs = {}
 num = '00000000'
 while num != '100000000'
   tel = special + num
+  if hyphen
+    tel = tel.insert(3, '-').insert(8, '-')
+  end
   hash = digest.hexdigest(tel)
   fhs[hash[0]].print [hash, tel].join("\t"), "\n"
   num.next!
