@@ -17,32 +17,22 @@ argv   = opt.parse(ARGV)
 special = argv[0] || '080'
 digest = Digest(hash_name)
 
-tel_hash = {}
+fhs = {}
 
 ['0'..'9', 'a'..'f'].each { |r|
   r.each { |c|
-    tel_hash[c] = []
+    fhs[c] = open(directory + File::SEPARATOR + c + '.tsv', 'w')
   }
 }
-
-# def insert_array(a, v)
-#   hash = v[0]
-#   index = a.bsearch_lower_boundary { |x| x[0] <=> hash }
-#   a.insert(index, v)
-# end
 
 num = '00000000'
 while num != '100000000'
   tel = special + num
   hash = digest.hexdigest(tel)
-  tel_hash[hash[0]].push([hash, tel])
+  fhs[hash[0]].print [hash, tel].join("\t"), "\n"
   num.next!
 end
 
-tel_hash.keys.sort.each { |c|
-  open(directory + File::SEPARATOR + c + '.tsv', 'w') { |f|
-    tel_hash[c].sort_by {|a,b| a[0] <=> b[0] }.each { |v|
-      f.print v.join("\t") , "\n"
-    }
-  }
+fhs.keys { |c|
+  fhs[c].close
 }
