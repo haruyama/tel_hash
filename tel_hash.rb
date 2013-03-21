@@ -32,7 +32,7 @@ tel_hash = {}
 # end
 
 num = '00000000'
-while num < '100000000'
+while num != '100000000'
   tel = special + num
   hash = digest.hexdigest(tel)
   tel_hash[hash[0]].push([hash, tel])
