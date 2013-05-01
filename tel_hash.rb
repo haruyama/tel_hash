@@ -9,9 +9,9 @@ opt = OptionParser.new
 directory = '.'
 hyphen    = false
 hash_name = 'MD5'
-opt.on('--directory=VAL') {|v| directory = v }
-opt.on('--hyphen')        {|v| hyphen = true }
-opt.on('--hash=VAL')      {|v| hash_name = v}
+opt.on('--directory=VAL') { |v| directory = v }
+opt.on('--hyphen')        { |v| hyphen = true }
+opt.on('--hash=VAL')      { |v| hash_name = v }
 
 argv   = opt.parse(ARGV)
 special = argv[0] || '080'
@@ -28,9 +28,7 @@ fhs = {}
 num = '00000000'
 while num != '100000000'
   tel = special + num
-  if hyphen
-    tel = tel.insert(3, '-').insert(8, '-')
-  end
+  tel = tel.insert(3, '-').insert(8, '-') if hyphen
   hash = digest.hexdigest(tel)
   fhs[hash[0]].print [hash, tel].join("\t"), "\n"
   num.next!
